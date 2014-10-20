@@ -1,8 +1,8 @@
-body {
+body {/*this code takes out the space and padding in the html canvas code in the index page*/
     margin: 0;
     padding: 0;
 }
 
-#game-screen{
+#game-screen{/*the code takes out the */
     display: block;
 }

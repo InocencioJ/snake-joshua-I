@@ -38,6 +38,8 @@ function gameInitialize() {
     
     canvas.width = screenWidth;
     canvas.height = screenHeight;
+    
+   /* document.addEventListener();*/
 }
 
 function gameLoop() {
@@ -60,7 +62,7 @@ function gameDraw() {
 function snakeInitialize(){
     snake = [];
     snakeLength = 10;
-    snakeSize = 30;
+    snakeSize = 25;
     snakeDirection = 'down';
     
     for(var index = snakeLength - 1; index >= 0; index--) {
@@ -68,7 +70,7 @@ function snakeInitialize(){
          x: index,
          y: 0
     });    
-    }
+  }
 }
 
 function snakeDraw(){
@@ -82,8 +84,11 @@ function snakeUpdate(){
     var snakeHeadX = snake[0].x;
     var snakeHeadY = snake[0].y;
     
-    if(snakeDirection == "down"){
+    if(snakeDirection === "down"){
         snakeHeadY++;
+    }
+    else{
+       snakeHeadX++;
     }
     
     var snakeTail = snake.pop();
