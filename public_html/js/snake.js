@@ -77,7 +77,7 @@ function snakeDraw(){
     for(var index = 0; index < snake.length; index++) {
         context.fillStyle = "white";
         context.fillRect(snake[index].x * snakeSize, snake[index].y * snakeSize, snakeSize, snakeSize);
-        
+    }    
 }
 /*the function will allow the snake to update to turn to a different direction*/
 function snakeUpdate(){
@@ -149,5 +149,5 @@ function keyboardHandler(event){
     else if(event.keyCode == "38" && snakeDirection !== "down"){
         snakeDirection = "up";
     }
-  }
+  
 }
