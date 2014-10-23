@@ -3,6 +3,6 @@ body {/*this code takes out the space and padding in the html canvas code in the
     padding: 0;
 }
 
-#game-screen{/*the code takes out the */
+#game-screen{/*the code takes out the scrole bars on the sides of thee screen*/
     display: block;
 }
