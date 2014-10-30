@@ -14,7 +14,11 @@ var context;
 var screenWidth;
 var screenHeight;
 
-var gameState
+var gameState;
+var gameOverMenu;
+var restartButton;
+var playHUD;
+var scoreboard;
 /*-------------------------------------------------
  * Executing game code
  -------------------------------------------------- 
@@ -42,11 +46,21 @@ function gameInitialize() {
 
     document.addEventListener("keydown", keyboardHandler);
     
+    gameOverMenu = document.getElementById("gameOver")
+    centerMenuPosition(gameOverMenu);
+    
+    restartButton = document.getElementById("restartButton");
+    restartButton.addEventListener("click", gameRestart);
+    
+    playHUD = document.getElementById("playHUD")
+    scoreboard = document.getElementById("scoreboard")
+    
     setState("PLAY");
 }
 /*the function can take multiple executing game codes and loop it for an infinity amount of time*/
 function gameLoop() {
     gameDraw();
+    drawScoreBoard();
     if (gameState == "PLAY") {
         snakeUpdate();
         snakeDraw();
@@ -57,7 +71,15 @@ function gameLoop() {
 function gameDraw() {
     context.fillStyle = "rgb(148, 225, 255)";
     context.fillRect(0, 0, screenWidth, screenHeight);
-}
+    
+    }    
+    function gameRestart(){
+        snakeInitialize();
+        foodInitialize();
+        hideMenu(gameOverMenu);
+        setState("PLAY");
+    }
+
 
 /*-----------------------------------------------------
  * snake function
@@ -66,7 +88,7 @@ function gameDraw() {
 /* the function will start the snake in a specific direction*/
 function snakeInitialize() {
     snake = [];
-    snakeLength = 3;
+    snakeLength = 5;
     snakeSize = 25;
     snakeDirection = 'down';
 
@@ -178,6 +200,10 @@ function checkWallCollisions(snakeHeadX, snakeHeadY) {
         console.log("wall collision");
         setState("GAME OVER");
     }
+    if (snakeHeadY * snakeSize >= screenWidth || snakeHeadY * snakeSize < 0){
+        console.log("wall collision");
+        setState("GAME OVER");
+    }
 }
 
 /*----------------------------------------------
@@ -187,5 +213,35 @@ function checkWallCollisions(snakeHeadX, snakeHeadY) {
 
 function setState(state) {
     gameState = state;
+    showMenu(state);
 }
- 
+
+/*-----------------------------------------
+ * Menu functions
+ *---------------------------------------- 
+ */
+function displayMenu(menu){
+    menu.style.visibility = "visible";
+}
+
+function hideMenu(menu){
+    menu.style.visibility = "hidden";
+}
+
+function showMenu(state){
+    if(state == "GAME OVER") {
+        displayMenu(gameOverMenu);
+    }
+    else if(state == "PLAY") {
+        displayMenu(playHUD);
+    }
+}
+
+function centerMenuPosition(menu){
+    menu.style.top = (screenHeight / 2) - (menu.offsetHeight / 2) + "px";
+    menu.style.left = (screenWidth / 2) - (menu.offsetWidth / 2) + "px";
+}
+
+function drawScoreBoard() {
+    scoreboard.innerHTML ="Score:" + snakeLength >= 0;
+}
