@@ -88,7 +88,7 @@ function gameDraw() {
 /* the function will start the snake in a specific direction*/
 function snakeInitialize() {
     snake = [];
-    snakeLength = 5;
+    snakeLength = 30;
     snakeSize = 25;
     snakeDirection = 'down';
 
@@ -99,6 +99,7 @@ function snakeInitialize() {
         });
     }
 }
+
 /*this funnction will draw the snake in a chosen style*/
 function snakeDraw() {
     for (var index = 0; index < snake.length; index++) {
@@ -111,9 +112,8 @@ function snakeUpdate() {
     var snakeHeadX = snake[0].x;
     var snakeHeadY = snake[0].y;
 
-    checkFoodCollisions(snakeHeadX, snakeHeadY);
-    checkWallCollisions(snakeHeadX, snakeHeadY)
-
+    
+    
     if (snakeDirection == "down") {/*this code makes the snake turn down*/
         snakeHeadY++;
     }
@@ -127,6 +127,10 @@ function snakeUpdate() {
     else if (snakeDirection == "left") {/*this makes the snake turn left*/
         snakeHeadX--;
     }
+
+    checkFoodCollisions(snakeHeadX, snakeHeadY);
+    checkWallCollisions(snakeHeadX, snakeHeadY)
+    checkSnakeCollisions(snakeHeadX, snakeHeadY)
 
     var snakeTail = snake.pop();
     snakeTail.x = snakeHeadX;
@@ -200,11 +204,20 @@ function checkWallCollisions(snakeHeadX, snakeHeadY) {
         console.log("wall collision");
         setState("GAME OVER");
     }
-    if (snakeHeadY * snakeSize >= screenWidth || snakeHeadY * snakeSize < 0){
+    if (snakeHeadY * snakeSize >= screenHeight || snakeHeadY * snakeSize < 0){
         console.log("wall collision");
         setState("GAME OVER");
     }
+}   
+function checkSnakeCollisions(snakeHeadX, snakeHeadY){
+    for(var index = 1; index < snake.length; index++) {
+        if(snakeHeadX == snake[index].x && snakeHeadY == snake[index].y) {
+            setState("GAME OVER");
+            return;
+        }
+    }
 }
+
 
 /*----------------------------------------------
  *Game State Hanling 
@@ -243,5 +256,5 @@ function centerMenuPosition(menu){
 }
 
 function drawScoreBoard() {
-    scoreboard.innerHTML ="Score:" + snakeLength >= 0;
+    scoreboard.innerHTML ="Score:" + snakeLength;
 }
