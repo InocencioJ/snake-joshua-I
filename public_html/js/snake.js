@@ -59,6 +59,7 @@ function gameInitialize() {
 }
 /*the function can take multiple executing game codes and loop it for an infinity amount of time*/
 function gameLoop() {
+    showIntro();
     gameDraw();
     drawScoreBoard();
     if (gameState == "PLAY") {
@@ -167,7 +168,7 @@ function setFoodPosition() {
  * Input Functions
  * ------------------------------------------------------
  */
-function keyboardHandler(event) {
+function keyboardHandler(event) {/*allows the snake to move a 90 degree angle*/
     console.log(event);
 
     if (event.keyCode == "39" && snakeDirection !== "left") {
@@ -189,7 +190,7 @@ function keyboardHandler(event) {
  * Collision Handling
  * -------------------------------------------
  */
-function checkFoodCollisions(snakeHeadX, snakeHeadY) {
+function checkFoodCollisions(snakeHeadX, snakeHeadY) {/*checks the snake every time it moves to see if it collides with is self*/
     if (snakeHeadX == food.x && snakeHeadY == food.y) {
         snake.push({
             x: 0,
@@ -199,7 +200,7 @@ function checkFoodCollisions(snakeHeadX, snakeHeadY) {
     }
 }
 
-function checkWallCollisions(snakeHeadX, snakeHeadY) {
+function checkWallCollisions(snakeHeadX, snakeHeadY) {/**/
     if (snakeHeadX * snakeSize >= screenWidth || snakeHeadX * snakeSize < 0) {
         console.log("wall collision");
         setState("GAME OVER");
@@ -233,6 +234,18 @@ function setState(state) {
  * Menu functions
  *---------------------------------------- 
  */
+
+ function showIntro() {
+        c.fillStyle = '#000';
+        c.fillRect(0, 0, width*pixelsize, height*pixelsize);
+           c.fillStyle = '#fff';
+        c.font = '30px sans-serif';
+        c.textAlign = 'center';
+        c.fillText('Snake', width/2*pixelsize, height/4*pixelsize, width*pixelsize);
+         c.font = '12px sans-serif';
+        c.fillText('Arrows = change direction.', width/2*pixelsize, height/2*pixelsize);
+        c.fillText('Space = start/pause.', width/2*pixelsize, height/1.5*pixelsize);
+        }
 function displayMenu(menu){
     menu.style.visibility = "visible";
 }
@@ -258,3 +271,4 @@ function centerMenuPosition(menu){
 function drawScoreBoard() {
     scoreboard.innerHTML ="Score:" + snakeLength;
 }
+

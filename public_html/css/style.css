@@ -7,32 +7,32 @@ body {/*this code takes out the space and padding in the html canvas code in the
     display: block;
 }
 
-#gameOver, #playHUD{
+#gameOver, #playHUD{/*this keeps the game over and score board hidden at specific times*/
     position: absolute;
     visibility: hidden;
 }
 
-h1, h2, h3 {
+h1, h2, h3 {/*this customises every text in the game to a specific font*/
     font-family: 'Paytone One', sans-serif;
     color:black;
     text-align: center;
 }
 
-.title{
+.title{/*sets the title to a font size of 62px*/
     font-size: 62px;
     margin-bottom: 0px;
     margin-top: 0px;
 }
 
-#restartButton{
+#restartButton{/*sets a code with a ID called restertButton to have a border of 2px*/
     border:2px solid black;
     border-radius: 10px;
 }
 
-#restartButton:hover{
+#restartButton:hover{/*sets the restart button to have a color apper when the mouse hovers it*/ 
     background-color: #000990
 }
 
-#scoreboard{
+#scoreboard{/*sets the score board to have a margin of 0*/
     margin:0px;
 }
